@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:sec="https://thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Info</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="px-4 py-5 my-5 text-center">
+    <h3 class="display-5 fw-bold">Edit Data</h3>
+</div>
+<div class="container-md align-items-center">
+    <form th:action="@{/submit_details}" method="post" class="form-group" th:object="${userData}">
+        <input type="hidden" th:field="*{id}" />
+        <h5 class="display-5 fw-bold">Personal info</h5>
+        <div>
+            <label class="col-form-label col-4">First Name</label>
+            <input type="text" th:field="*{firstName}">
+        </div>
+        <div>
+            <label class="col-form-label col-4">Last Name</label>
+            <input type="text" th:field="*{lastName}">
+        </div>
+        <div>
+            <label class="col-form-label col-4">Birth Date</label>
+            <input type="date" id="datePicker" class="datepicker" min="1900-01-01" th:field="*{birthDate}">
+        </div>
+        <div>
+            <div>
+                <label class="col-form-label col-4">Address line 1</label>
+                <input type="text" th:field="*{addressLine1}">
+            </div>
+            <div>
+                <label class="col-form-label col-4">Address line 2</label>
+                <input type="text" th:field="*{addressLine2}">
+            </div>
+            <div>
+                <label class="col-form-label col-4">City / Municipality</label>
+                <input type="text" th:field="*{municipality}">
+            </div>
+            <div>
+                <label class="col-form-label col-4">Country</label>
+                <input type="text" th:field="*{country}">
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a type="button" onclick="goBack()" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+<script>
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1;
+    let yyyy = today.getFullYear() - 3;
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("datePicker").setAttribute("max", today);
+</script>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+</body>
+</html>

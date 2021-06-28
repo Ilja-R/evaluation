@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:sec="https://thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Info</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+</head>
+<body>
+<container>
+    <div class="float-md-right">
+        <a class="btn btn-info btn-lg" href="/logout" method="post">Logout</a>
+    </div>
+</container>
+<div class="px-4 py-5 my-5 text-center">
+    <h3 class="display-5 fw-bold" th:text="Welcome + ' ' + ${user.username}"/>
+</div>
+<div class="container-md align-items-center">
+    <h3 class="display-5 fw-bold">Personal info</h3>
+    <div class="container">
+        <div>
+            <div class="row">
+                <label class="col-form-label col-4">First Name</label>
+                <td th:text="${userData.firstName}"></td>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <label class="col-form-label col-4">Last Name</label>
+                <td th:text="${userData.lastName}"></td>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <label class="col-form-label col-4">Birth Date</label>
+                <td th:text="${userData.birthDate}"></td>
+            </div>
+        </div>
+        <label class="col-form-label col-4">Address:</label>
+        <div class="container">
+            <div>
+                <label class="col-form-label col-4">Address line 1</label>
+                <td type="text" th:text="*{userData.addressLine1}">
+            </div>
+            <div>
+                <label class="col-form-label col-4">Address line 2</label>
+                <td type="text" th:text="*{userData.addressLine2}">
+            </div>
+            <div>
+                <label class="col-form-label col-4">City / Municipality</label>
+                <td type="text" th:text="*{userData.municipality}">
+            </div>
+            <div>
+                <label class="col-form-label col-4">Country</label>
+                <td type="text" th:text="*{userData.country}">
+            </div>
+        </div>
+    </div>
+    <a th:href="@{/profile/edit}" type="button" class="btn btn-primary">Edit My Info</a>
+    <a id="deactivate" th:href="@{/profile/deactivate}" type="button"
+       data-dismiss="alert" class="btn btn-danger">Delete User</a>
+</div>
+<script>
+    let element = document.getElementById('deactivate');
+    let confirmIt = function (e) {
+        if (!confirm('Are you sure? you want to deactivate your account?')) e.preventDefault();
+    };
+    element.addEventListener('click', confirmIt, false);
+</script>
+</body>
+</html>

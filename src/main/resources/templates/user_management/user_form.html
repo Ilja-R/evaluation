@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:sec="https://thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container text-center">
+    <div>
+        <h1>Edit User</h1>
+    </div>
+    <form th:action="@{/users/save}" th:object="${user}" method="post"  style="max-width: 600px; margin: 0 auto;" >
+        <input th:field="${user.id}" th:attr="name='userId'"/>
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-4">Username</label>
+                <div class="col-6">
+                    <input type="text" class="form-control" th:field="*{username}" required
+                           minlength="3" maxlength="20"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">E-mail</label>
+                <div class="col-6">
+                    <input type="email" class="form-control" th:field="*{email}" required
+                           minlength="3" maxlength="64"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Password</label>
+                <div class="col-6">
+                    <input type="password" class="form-control" th:field="*{password}" required
+                           minlength="6" maxlength="10"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-4">Is Active</label>
+                <div class="col-6">
+                    <input type="checkbox" name="isActive" th:checked="*{isActive}"/>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-form-label col-4">Assigned Roles</label>
+                <div class="col-6">
+                    <th:block th:each="role: ${listRoles}">
+                        <input type="checkbox" th:field="*{roles}"
+                               th:value="${role.id}"
+                               th:text="${role.name}" class="m-2"/>
+                    </th:block>
+                </div>
+            </div>
+
+            <div class="container-md align-items-center">
+                <form method="post" class="form-group" th:object="${userData}">
+                    <h5 class="display-5 fw-bold">Personal info</h5>
+                    <div>
+                        <label class="col-form-label col-4">First Name</label>
+                        <input type="text" th:field="*{firstName}">
+                    </div>
+                    <div>
+                        <label class="col-form-label col-4">Last Name</label>
+                        <input type="text" th:field="*{lastName}">
+                    </div>
+                    <div>
+                        <label class="col-form-label col-4">Birth Date</label>
+                        <input type="date" id="datePicker" class="datepicker" min="1900-01-01" th:field="*{birthDate}">
+                    </div>
+                    <div>
+                        <div>
+                            <label class="col-form-label col-4">Address line 1</label>
+                            <input type="text" th:field="*{addressLine1}">
+                        </div>
+                        <div>
+                            <label class="col-form-label col-4">Address line 2</label>
+                            <input type="text" th:field="*{addressLine2}">
+                        </div>
+                        <div>
+                            <label class="col-form-label col-4">City / Municipality</label>
+                            <input type="text" th:field="*{municipality}">
+                        </div>
+                        <div>
+                            <label class="col-form-label col-4">Country</label>
+                            <input type="text" th:field="*{country}">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
