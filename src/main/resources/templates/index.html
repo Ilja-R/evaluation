@@ -10,13 +10,13 @@
     <h1 style="margin: 50px">Welcome</h1>
     <p/>
     <div>
-        <h3><a th:href="@{/register}">Register</a></h3>
-        <h3><a th:href="@{/profile}">Login/Profile</a></h3>
-        <h3><a th:href="@{/users}">List Users (For admins only)</a></h3>
+        <h3><a id="registerButton" th:href="@{/register}">Register</a></h3>
+        <h3><a id="loginButton" th:href="@{/profile}">Login/Profile</a></h3>
+        <h3><a id="listUsersButton" th:href="@{/users}">List Users (For admins only)</a></h3>
     </div>
     <div class="fixed-bottom">
         <p>For testing purposes</p>
-        <a th:href="@{/add_admin}">Add Admin</a>
+        <a id="addAdminButton" th:href="@{/add_admin}">Add Admin</a>
     </div>
 </div>
 </body>

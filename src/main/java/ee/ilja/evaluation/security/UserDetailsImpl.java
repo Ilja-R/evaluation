@@ -58,10 +58,11 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user.getIsActive(); //TODO: change this to isEnabled field in database
+        return user.getIsActive();
     }
 
     public String getName() {
         return user.getUsername();
     }
+
 }

@@ -13,7 +13,7 @@
             <h3>
                 Welcome <b>[[${#request.userPrincipal.principal.name}]]</b>
             </h3>
-            <input type="submit" value="Sign Out">
+            <input type="submit" class="btn btn-outline-warning" value="Sign Out">
         </form>
     </div>
     <div>
@@ -26,6 +26,7 @@
                 <th>Email</th>
                 <th>Username</th>
                 <th>Roles</th>
+                <th>Actions</th>
             </thead>
             <tbody>
                 <tr th:each="user: ${listUsers}">

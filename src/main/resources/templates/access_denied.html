@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Access Denied</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container text-center">
+    <h1 style="margin: 50px">You have no rights to be here! Please logout and login as admin or go to main page</h1>
+    <p/>
+    <div>
+        <h3><a id="loginButton" th:href="@{/logout}">Logout</a></h3>
+        <h3><a id="listUsersButton" th:href="@{/}">Go home</a></h3>
+    </div>
+</div>
+</body>
+</html>

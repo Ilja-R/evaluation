@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
-public class HomePageController {
+public class HomeController {
 
     @Autowired
     private UserService userService;

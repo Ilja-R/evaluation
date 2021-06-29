@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class UsersPageController {
+public class UsersController {
 
     @Autowired
     private UserService userService;
@@ -35,7 +35,6 @@ public class UsersPageController {
         User user = userService.getUserById(id);
         List<Role> roles = userService.getRoles();
         UserData userData = userDataService.getUserDataByUserId(user.getId());
-//        user.setUserData(userData);
         model.addAttribute("user", user);
         model.addAttribute("userData", userData);
         model.addAttribute("listRoles", roles);

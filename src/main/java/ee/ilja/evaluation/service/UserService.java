@@ -61,7 +61,7 @@ public class UserService {
     }
 
     public void deactivateUser(Long userId){
-        User user = userRepository.findById(userId).get();
+        User user = userRepository.getById(userId);
         user.setIsActive(false);
         userRepository.save(user);
     }
