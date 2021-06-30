@@ -43,16 +43,9 @@ public class UsersController {
 
     @PostMapping("/users/save")
     public String saveUser(User user, UserData userData){
-        /**IR: a workaround for problems with Thymeleaf template
-         * TODO: Ask someone for an advice
-         * */
-        if (user.getIsActive() == null) {
-            user.setIsActive(false);
-        }
-        Long userDataId = userDataService.getUserDataByUserId(user.getId()).getId();
-        userData.setId(userDataId);
-        user.setUserData(userData);
-        userService.updateUser(user);
+
+        userService.saveUpdatedUser(user, userData);
+
         return "redirect:/users";
     }
 }

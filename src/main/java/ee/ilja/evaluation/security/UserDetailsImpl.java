@@ -36,6 +36,8 @@ public class UserDetailsImpl implements UserDetails {
         return user.getPassword();
     }
 
+    /**IR: in our case email is unique username
+     * */
     @Override
     public String getUsername() {
         return user.getEmail();

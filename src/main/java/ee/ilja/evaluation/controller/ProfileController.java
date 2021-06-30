@@ -55,7 +55,7 @@ public class ProfileController {
         String userEmail = userDetails.getUsername();
         User user = userService.getUserByEmail(userEmail);
         userService.deactivateUser(user.getId());
-        return "redirect:/logout";
+        return "redirect:/performLogout?";
     }
 
     @PostMapping("/submit_details")

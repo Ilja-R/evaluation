@@ -36,6 +36,11 @@ public class HomeController {
         return "registration/signup_form";
     }
 
+    @GetMapping("/login")
+    public String showLoginForm(){
+        return "login";
+    }
+
     @PostMapping("/process_register")
     public String processRegistration(@ModelAttribute("user") User user, BindingResult bindingResult) {
 

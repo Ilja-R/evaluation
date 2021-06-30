@@ -10,8 +10,12 @@
     <h1 style="margin: 50px">You have no rights to be here! Please logout and login as admin or go to main page</h1>
     <p/>
     <div>
-        <h3><a id="loginButton" th:href="@{/logout}">Logout</a></h3>
-        <h3><a id="listUsersButton" th:href="@{/}">Go home</a></h3>
+        <form th:action="@{/performLogout}" method="post" class="col text-center">
+            <h3 class="d-flex justify-content-center">
+                <input type="submit" value="Logout" class="btn btn-secondary btn-block w-25 p-3 translate-middle"/>
+            </h3>
+        </form>
+        <h3><a id="goHome" th:href="@{/}">Go home</a></h3>
     </div>
 </div>
 </body>

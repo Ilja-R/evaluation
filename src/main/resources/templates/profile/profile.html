@@ -9,7 +9,9 @@
 <body>
 <container>
     <div class="float-md-right">
-        <a class="btn btn-info btn-lg" href="/logout" method="post">Logout</a>
+        <form th:action="@{/performLogout}" method="post">
+            <input type="submit" value="Logout" class="btn btn-info btn-lg"/>
+        </form>
     </div>
 </container>
 <div class="px-4 py-5 my-5 text-center">

@@ -23,6 +23,9 @@ public class UserService {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    UserDataService userDataService;
+
     public User saveNewUser(User user, String roleName){
 
         User foundUser = userRepository.findByEmail(user.getEmail());
@@ -48,8 +51,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void saveUser(User user) {
-        userRepository.save(user);
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 
     public User updateUser(User user) {
@@ -90,6 +93,21 @@ public class UserService {
         user.setIsActive(true);
         return updateUser(user);
 
+    }
+
+    public User saveUpdatedUser(User user, UserData userData){
+        /**IR: a workaround for problems with Thymeleaf template
+         * TODO: Ask someone for an advice
+         * */
+        if (user.getIsActive() == null) {
+            user.setIsActive(false);
+        }
+        String password = getUserById(user.getId()).getPassword();
+        Long userDataId = userDataService.getUserDataByUserId(user.getId()).getId();
+        userData.setId(userDataId);
+        user.setUserData(userData);
+        user.setPassword(password);
+        return saveUser(user);
     }
 
 }
