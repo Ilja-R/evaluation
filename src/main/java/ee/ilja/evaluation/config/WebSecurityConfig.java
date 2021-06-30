@@ -1,7 +1,6 @@
 package ee.ilja.evaluation.config;
 
 import ee.ilja.evaluation.security.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -12,15 +11,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private DataSource dataSource;
 
     @Bean
     public HttpSessionEventPublisher httpSessionEventPublisher(){
@@ -60,10 +56,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                     .usernameParameter("email")
+                    .loginPage("/login")
                     .defaultSuccessUrl("/profile")
+                    .failureUrl("/login-error")
                     .permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/").permitAll();
+                .logout()
+                    .logoutUrl("/performLogout")
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/performLogout"))
+                    .logoutSuccessUrl("/")
+                    .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/access-denied");;
 
         ;
     }

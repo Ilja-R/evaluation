@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class UsersPageController {
+public class UsersController {
 
     @Autowired
     private UserService userService;
@@ -35,7 +35,6 @@ public class UsersPageController {
         User user = userService.getUserById(id);
         List<Role> roles = userService.getRoles();
         UserData userData = userDataService.getUserDataByUserId(user.getId());
-//        user.setUserData(userData);
         model.addAttribute("user", user);
         model.addAttribute("userData", userData);
         model.addAttribute("listRoles", roles);
@@ -44,16 +43,9 @@ public class UsersPageController {
 
     @PostMapping("/users/save")
     public String saveUser(User user, UserData userData){
-        /**IR: a workaround for problems with Thymeleaf template
-         * TODO: Ask someone for an advice
-         * */
-        if (user.getIsActive() == null) {
-            user.setIsActive(false);
-        }
-        Long userDataId = userDataService.getUserDataByUserId(user.getId()).getId();
-        userData.setId(userDataId);
-        user.setUserData(userData);
-        userService.updateUser(user);
+
+        userService.saveUpdatedUser(user, userData);
+
         return "redirect:/users";
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
-public class HomePageController {
+public class HomeController {
 
     @Autowired
     private UserService userService;
@@ -34,6 +34,11 @@ public class HomePageController {
     public String showSignUpForm(Model model) {
         model.addAttribute("user", new User());
         return "registration/signup_form";
+    }
+
+    @GetMapping("/login")
+    public String showLoginForm(){
+        return "login";
     }
 
     @PostMapping("/process_register")

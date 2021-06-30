@@ -36,6 +36,8 @@ public class UserDetailsImpl implements UserDetails {
         return user.getPassword();
     }
 
+    /**IR: in our case email is unique username
+     * */
     @Override
     public String getUsername() {
         return user.getEmail();
@@ -58,10 +60,11 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user.getIsActive(); //TODO: change this to isEnabled field in database
+        return user.getIsActive();
     }
 
     public String getName() {
         return user.getUsername();
     }
+
 }
